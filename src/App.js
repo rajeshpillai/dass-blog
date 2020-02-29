@@ -27,9 +27,15 @@ const DEFAULT_STATE = {
       
       "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains."
       `,
-      published: true},
-    {id: 2, title: "Post 2", body: "Post 2 goes here", published: true},
-    {id: 3, title: "Post 2", body: "Post 3 goes here", published: true},
+      published: true, comment_count: 3},
+    {id: 2, title: "Post 2", body: "Post 2 goes here", published: true, comment_count: 1},
+    {id: 3, title: "Post 2", body: "Post 3 goes here", published: true, comment_count: 0},
+  ],
+  comments: [
+    {id: 1, post_id: 1, title: "Comment 1", body: "Comment 1 goes here"},
+    {id: 2, post_id: 1, title: "Comment 2", body: "Comment 2 goes here"},
+    {id: 3, post_id: 1, title: "Comment 3", body: "Comment 3 goes here"},
+    {id: 4, post_id: 2, title: "Comment 4", body: "Comment 4 goes here"},
   ]
 }
 
@@ -43,8 +49,12 @@ function readPost(props) {
   let postId = props.match.params.id;
   let post = DEFAULT_STATE.posts.find(p => p.id == postId);
   console.log(post);
+
+  let comments = DEFAULT_STATE.comments.filter((c) => {
+    return c.post_id == post.id;
+  })
   return (
-    <Read post = {post}/>
+    <Read post = {post} comments = {comments}/>
   )
 }
 
