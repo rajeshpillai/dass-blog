@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {BrowserRouter as Router, Route, NavLink} from 'react-router-dom';
 import './App.css';
 import Nav from './components/nav';
@@ -39,6 +39,8 @@ const DEFAULT_STATE = {
   ]
 }
 
+
+
 function loadPost() {
   return (
     <Posts posts= {DEFAULT_STATE.posts} />
@@ -60,6 +62,15 @@ function readPost(props) {
 
 
 function App() {
+  useEffect(() => {
+    fetch("/posts.json")
+      .then((data) => data.json())
+      .then((response) => {
+        console.log(response)
+      });
+
+  },[]);
+  
   return (
     <Router>
       <div className="container">
